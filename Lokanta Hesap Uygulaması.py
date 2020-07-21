@@ -1,12 +1,15 @@
-masalar=[]
-girenMusteri=[]
-yemekler=[]
-icecekler=[]
-menuler=[]
-LokantaSahip=[]
-Müşteriler=[]
-rezervasyonlar=[]
-
+z=0
+if z==0:
+    masalar=[]
+    girenMusteri=[]
+    yemekler=[]
+    icecekler=[]
+    menuler=[]
+    LokantaSahip=[]
+    Müşteriler=[]
+    rezervasyonlar=[]
+    LokantaSahip=[]
+    Müşteriler=[]
 
 
 from time import sleep as ts
@@ -129,7 +132,7 @@ def lokantaSahibiKayit():
         içinde en az bir harf ve bir rakam bulunmalıdır.""".lower())
         kullanici_adi=input("\nHesabınız için kullanıcı adı: \n")
 
-        if not kullanici_adi.isdigit() and not kullanici_adi.isalpha and len(kullanici_adi)>=6:
+        if not kullanici_adi.isdigit() and not kullanici_adi.isalpha() and len(kullanici_adi)>=6:
             break
         else:
             print("Geçersiz Kullanıcı Adı!!!")
@@ -142,7 +145,7 @@ def lokantaSahibiKayit():
         içinde en az bir harf ve bir rakam bulunmalıdır.""")
         parola=input("\nHesabınız için parola: \n".lower())
 
-        if not parola.isdigit() and not parola.isalpha and len(parola)>=6:
+        if not parola.isdigit() and not parola.isalpha() and len(parola)>=6:
             break
 
         else:
@@ -201,14 +204,15 @@ def lokantaSahibiKayit():
 
 
 def sahipGirisi():
-    global musteriGirdi,sahipGirildi
-
+    
+    global musteriGirdi,sahipGirildi,LokantaSahip
+    sahipGirildi=False
     while True:
         os.system("cls")
         
-        o=1
-        if o==1:
-            kullanici_adi=input("Kullanınıcı Adınız: ".lower())
+        #o=1
+        if not sahipGirildi:
+            kullanici_adi=input("Kullanınıcı Adınız: ")
             count=0
             for i in LokantaSahip:
                 if i.kullanici_adi==kullanici_adi:
@@ -216,23 +220,37 @@ def sahipGirisi():
                     if i.parola==parola:
                         print("Giriş Yapıldı!!")
                         sahipGirildi=True
+                        return 1
+                       
+
+            
+                        
+          
                         
 
                     else:
                         print("Geçersiz Parola!!")
                         o=1
                         break
-
+            
+            
 
 
 
                 else:
                     count+=1
 
+            
+
+
             if count==len(LokantaSahip):
                 print("Geçersiz Kullancı Adı!!")
                 continue
 
+
+    
+
+       
 
 
 
@@ -391,7 +409,7 @@ def yemekEkle():
         os.system("cls")
         fiyat=input("Yemeğin Fiyatı: ")
         if fiyat.isdigit():
-            fiyat=int(fiyat)
+            
             break
 
 
@@ -441,7 +459,7 @@ def yemekEkle():
     while True:
         os.system("cls")
         miktar1=input("Yemeğin/İçeceğin Miktarı(1,2,3 vb): ")
-        if miktar1.isdigit and not miktar1.isdecimal:
+        if  miktar1.isdigit():
             miktar1=int(miktar1)
             break
         else:
@@ -452,8 +470,8 @@ def yemekEkle():
     while True:
         os.system("cls")
         miktarOlcegi=input("Yemeğin/İçeceğin Miktar Ölçeği(bardak,tabak,kaşık vb): ")
-        if miktarOlcegi.isdigit and not miktarOlcegi.isdecimal:
-            miktarOlcegi=int(miktarOlcegi)
+        if miktarOlcegi.isalpha():
+            
             break
         else:
             print("\nGeçersiz Değer")
@@ -478,7 +496,7 @@ def yemekEkle():
     dosya.close()
 
     dosya=open(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi\Yemekler\{}\Miktar1.txt".format(ad),"w")
-    dosya.write(miktar1)
+    dosya.write(str(miktar1))
     dosya.close()
 
 
@@ -488,7 +506,7 @@ def yemekEkle():
 
 
     dosya=open(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi\Yemekler\{}\Fiyat.txt".format(ad),"w")
-    dosya.write(fiyat)
+    dosya.write(str(fiyat))
     dosya.close()
 
     print("\nYemek Oluşturuldu!!")
@@ -583,7 +601,7 @@ def icecekEkle():
     while True:
         os.system("cls")
         miktar1=input("Yemeğin/İçeceğin Miktarı(1,2,3 vb): ")
-        if miktar1.isdigit and not miktar1.isdecimal:
+        if miktar1.isdigit():
             miktar1=int(miktar1)
             break
         else:
@@ -594,8 +612,8 @@ def icecekEkle():
     while True:
         os.system("cls")
         miktarOlcegi=input("Yemeğin/İçeceğin Miktar Ölçeği(bardak,tabak,kaşık vb): ")
-        if miktarOlcegi.isdigit and not miktarOlcegi.isdecimal:
-            miktarOlcegi=int(miktarOlcegi)
+        if miktarOlcegi.isalpha():
+            
             break
         else:
             print("\nGeçersiz Değer")
@@ -620,7 +638,7 @@ def icecekEkle():
     dosya.close()
 
     dosya=open(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi\İçecekler\{}\Miktar1.txt".format(ad),"w")
-    dosya.write(miktar1)
+    dosya.write(str(miktar1))
     dosya.close()
 
 
@@ -1676,7 +1694,7 @@ def sahipİslemleri():
     if z==0:
         if z==0:
             if z==0:
-                sahipGirisi()
+                
                 # çıkış işlemini tüm listleri clear ile temizleyip burda çıkcak seçenek menüsünün döngüsünü kırp üste geçerek yap
                 while True:
                     os.system("cls")
@@ -2130,16 +2148,6 @@ def main():
     global yemekler,icecekler,menuler,Müşteriler,LokantaSahibi,rezervasyonlar,masalar,sahipGirildi,musteriGirdi
     
 
-    masalar=[]
-    girenMusteri=[]
-    yemekler=[]
-    icecekler=[]
-    menuler=[]
-    LokantaSahip=[]
-    Müşteriler=[]
-    rezervasyonlar=[]
-    LokantaSahip=[]
-    Müşteriler=[]
 
     flag1=False
     if  os.path.exists(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı"):
@@ -2150,26 +2158,27 @@ def main():
         os.chdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar")
         if "Bilgiler.txt" in  os.listdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi") :
             dosya=open(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi\Bilgiler.txt","r")
-            v=dosya.readlines()
+            v=dosya.read().split("\n")
+            a=v[-1]
+            
             LokantaSahip.append(LokantaSahibi(v[0],v[1],v[2]))
             
             dosya.close()
 
 
 
-        z=0
-        if z==0:
+        
             
-            if os.listdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Rezervasyonlar"):
-                for dosya in  os.listdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Rezervasyonlar"):
-                    dosya1=open(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Rezervasyonlar\{}".format(dosya))
-                    dd=dosya1.readlines()
-                    d=dd[0]
-                    d1=dd[1]
-                    d2=dd[2]
-                    d3=dd[3:]
+        if os.listdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Rezervasyonlar"):
+            for dosya in  os.listdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Rezervasyonlar"):
+                dosya1=open(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Rezervasyonlar\{}".format(dosya))
+                dd=dosya1.readlines()
+                d=dd[0]
+                d1=dd[1]
+                d2=dd[2]
+                d3=dd[3:]
                 
-                    rezervasyonlar.append(Rezervasyon(d,d1,d2,d3))
+                rezervasyonlar.append(Rezervasyon(d,d1,d2,d3))
 
 
 
@@ -2182,7 +2191,7 @@ def main():
 
 
 
-        
+        try:
             os.chdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi\Masalar")
             if os.listdir(r"C:\Users\abdullah\Muhammet Fazıl BALIKÇI\Yazılım\Python Projelerim\Lokanta Veri Tabanı\Kullanıcılar\Lokanta Sahibi\Masalar"):
                 lll=0
@@ -2477,7 +2486,8 @@ def main():
                         dosya.close()
                         Müşteriler.append(Musteri(j,j1,j2))
 
-
+        except:
+            pass
 
 
 
